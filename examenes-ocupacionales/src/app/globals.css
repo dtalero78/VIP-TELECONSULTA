@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Design tokens — Identidad VIP: AZUL primario + TEAL acento.
+   (Tomado de VIP Salud Ocupacional / examenesparapase.com)
+   ============================================================ */
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef3f9;
+  --fg: #0f1f33;
+  --muted: #57667d;
+  --border: #e2e8f0;
+  --border-strong: #cbd6e2;
+  --accent: #0e6ec7;        /* brand-600 (azul VIP) */
+  --accent-strong: #0d58a1; /* brand-700 */
+  --accent-soft: #dbeefe;   /* brand-100 */
+  --accent-fg: #ffffff;
+  --teal: #14b8a6;          /* accent-500 (teal VIP) */
+  --teal-strong: #0d9488;   /* accent-600 */
+  --ring: #1d8ce8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a1626;
+    --surface: #0f2036;
+    --surface-2: #16304d;
+    --fg: #e8eef6;
+    --muted: #95a7bd;
+    --border: #21364f;
+    --border-strong: #314863;
+    --accent: #46a9f7;        /* brand-400 — más brillante en dark */
+    --accent-strong: #82c8fb;
+    --accent-soft: #11324f;
+    --accent-fg: #061a30;
+    --teal: #2dd4bf;
+    --teal-strong: #5eead4;
+    --ring: #46a9f7;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-teal: var(--teal);
+  --color-teal-strong: var(--teal-strong);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Caja outlined estilo CVS: borde fino, radio moderado, casi plana. */
+.card {
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+}
+
+/* Variante para tarjetas sobre secciones de superficie clara. */
+.tile {
+  border-radius: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card-hover:hover {
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px -18px rgba(8, 19, 18, 0.25);
+  }
+}
+
+/* Tarjeta blanca que se sobrepone a una imagen (hero / bento estilo CVS). */
+.float-card {
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 60px -28px rgba(8, 19, 18, 0.45);
+}
+
+/* Contenedor grande outlined (patrón de secciones CVS). */
+.container-box {
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
