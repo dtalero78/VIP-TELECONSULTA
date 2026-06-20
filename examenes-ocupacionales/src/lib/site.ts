@@ -8,11 +8,11 @@ export const company = {
   subtitle: "Exámenes Médicos Ocupacionales",
   nit: "901434471-7",
   email: null as string | null,
-  phone: "(601) 578 2492",
-  phoneHref: "tel:+576015782492",
-  whatsapp: "+57 313 444 4837",
+  phone: "301 241 9677",
+  phoneHref: "tel:+573012419677",
+  whatsapp: "+57 301 241 9677",
   whatsappHref:
-    "https://wa.me/573134444837?text=Hola%2C%20quiero%20hacer%20mi%20examen%20m%C3%A9dico%20ocupacional%20virtual.",
+    "https://wa.me/573012419677?text=Hola%2C%20quiero%20hacer%20mi%20examen%20m%C3%A9dico%20ocupacional%20virtual.",
   hours: "Lunes a viernes 7:00 a.m. a 4:00 p.m. Sábados 7:00 a.m. a 12:15 p.m.",
   address: "Carrera 28A No. 51-70, Bogotá D.C., Colombia",
 } as const;

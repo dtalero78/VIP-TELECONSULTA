@@ -9,6 +9,11 @@ const roles = [
   "Optómetra especialista en salud ocupacional",
   "Bacterióloga",
   "Auxiliares de enfermería",
+  "Psicología ocupacional",
+  "Vacunación",
+  "Espirometría",
+  "Electrocardiograma",
+  "Brigadas extramurales",
 ];
 
 export function Equipo() {

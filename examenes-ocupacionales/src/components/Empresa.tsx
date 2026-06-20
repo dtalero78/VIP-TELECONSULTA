@@ -3,6 +3,7 @@ import {
   VideoCameraIcon,
   CertificateIcon,
   ScalesIcon,
+  ClipboardTextIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { coverage, img, photos } from "@/lib/site";
 import { Reveal } from "./Reveal";
@@ -14,9 +15,14 @@ const cumplimiento = [
     desc: "El examen ocupacional virtual está habilitado desde 2020 por el Ministerio de Salud.",
   },
   {
+    icon: ClipboardTextIcon,
+    title: "Resolución 1843 de 2005",
+    desc: "Regula la práctica de las evaluaciones médicas ocupacionales y permite realizarlas por telemedicina (Art. 8 y 26).",
+  },
+  {
     icon: CertificateIcon,
-    title: "Licencia No. 64 de 2017",
-    desc: "Licencia de Salud Ocupacional vigente desde el 10 de enero de 2017.",
+    title: "Licencia No. 1100138064 de 2021",
+    desc: "Licencia de habilitación en Salud Ocupacional vigente desde 2021.",
   },
   {
     icon: ScalesIcon,
@@ -38,7 +44,7 @@ export function Empresa() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
             Nos gusta entender, analizar y aplicar soluciones que aporten al
-            bienestar de cada trabajador. Bienestar y Salud Laboral S.A.S. es
+            bienestar de cada trabajador. VIP Salud Ocupacional S.A.S. es
             líder en medicina preocupacional y ocupacional en Colombia.
           </p>
         </Reveal>
@@ -49,7 +55,7 @@ export function Empresa() {
             <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-surface sm:aspect-[16/7] lg:aspect-[21/9]">
               <Image
                 src={img(photos.sede, 1920, 820)}
-                alt="Instalaciones clínicas de la IPS Bienestar y Salud Laboral"
+                alt="Instalaciones clínicas de la IPS VIP Salud Ocupacional"
                 fill
                 sizes="(max-width: 1280px) 100vw, 1216px"
                 className="object-cover"
@@ -78,7 +84,7 @@ export function Empresa() {
         </Reveal>
 
         {/* Cumplimiento normativo */}
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {cumplimiento.map((c, i) => {
             const Icon = c.icon;
             return (

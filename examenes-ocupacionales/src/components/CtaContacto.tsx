@@ -71,9 +71,9 @@ export function CtaContacto() {
                 href={company.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-7 py-3.5 text-base font-semibold text-accent-fg transition-all hover:bg-accent-strong active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-accent px-9 py-4.5 text-lg font-semibold text-accent-fg transition-all hover:bg-accent-strong active:scale-[0.98]"
               >
-                <WhatsappLogoIcon weight="fill" className="h-5 w-5" />
+                <WhatsappLogoIcon weight="fill" className="h-6 w-6" />
                 Escríbenos por WhatsApp
               </a>
               <a
