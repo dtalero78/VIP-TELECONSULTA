@@ -10,7 +10,7 @@ export type DocumentType = (typeof documentTypes)[number]["value"];
 export function validDocument(type: string, number: string): boolean {
   if (!documentTypes.some((d) => d.value === type)) return false;
   return (
-    type === "PASS" || type === "CE" ? /^[A-Z0-9]{3,20}$/ : /^\d{5,15}$/
+    type === "PASS" ? /^[A-Z0-9]{3,20}$/ : /^\d{5,15}$/
   ).test(number);
 }
 export const cities = [

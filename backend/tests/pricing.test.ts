@@ -42,6 +42,7 @@ test("servidor exige examen médico aunque el cliente intente quitarlo", () => {
     lastName: "Prueba",
     document: "123456789",
     phone: "3000000000",
+    job: "Contratista",
     city: "Bogotá D.C.",
     date: colombiaToday(new Date(Date.now() + 86400000)),
     time: "09:00",

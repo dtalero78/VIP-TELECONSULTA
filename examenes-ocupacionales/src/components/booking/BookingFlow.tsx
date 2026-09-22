@@ -33,6 +33,7 @@ import { AppointmentPicker } from "./AppointmentPicker";
 import { VideoTutorial } from "../VideoTutorial";
 
 import { api, ApiError } from "@/lib/api-client";
+const suggestedJobs = ["Contratista", "Administrativo", "Auxiliar administrativo", "Asesor comercial", "Profesional independiente"];
 const stepLabels = [
   "Identificación",
   "Tus datos",
@@ -89,6 +90,7 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
     revision = useRef(0);
   const [saved, setSaved] = useState("");
   const [otherCity, setOtherCity] = useState(false);
+  const [otherJob, setOtherJob] = useState(false);
   const total = serviceTotal(patient.exams);
   const [dateBounds] = useState(() => ({
     min: colombiaToday(),
@@ -179,6 +181,7 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
     setPatient((p) => ({
       ...p,
       [key]: value,
+      ...(key === "documentType" && value !== "PASS" ? { document: p.document.replace(/\D/g, "").slice(0, 15) } : {}),
       ...(key === "date" ? { time: "" } : {}),
       ...(key === "account" && value === "particular" ? { company: "" } : {}),
     }));
@@ -273,8 +276,8 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
           onChange={(e) =>
             change(
               key,
-              (key === "document"
-                ? e.target.value.toUpperCase()
+              (key === "phone" ? e.target.value.replace(/\D/g, "") : key === "document"
+                ? patient.documentType === "PASS" ? e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "") : e.target.value.replace(/\D/g, "")
                 : e.target.value) as never,
             )
           }
@@ -474,6 +477,9 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
               </>
             )}
           </div>
+          {view.order === "confirmed" && (
+            <VideoTutorial key={view.reference} variant="next" confirmationId={view.reference} />
+          )}
           {view.order === "confirmed" &&
             config.paymentReady &&
             view.payment !== "approved" &&
@@ -582,10 +588,11 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
             <strong>{formatCOP(43000)}</strong>
             <span>Examen médico de ingreso</span>
           </div>
-          <p className="text-sm text-muted">
-            Con audiometría, visiometría o ambas:{" "}
-            <strong>{formatCOP(52000)} en total.</strong>
-          </p>
+          <div className="welcome-package">
+            <span className="welcome-package-label">Paquete completo</span>
+            <p>Examen médico <span aria-hidden="true">+</span> visiometría <span aria-hidden="true">+</span> audiometría</p>
+            <strong>{formatCOP(52000)} <small>en total</small></strong>
+          </div>
           <div className="mx-auto max-w-[460px]"><VideoTutorial /></div>
           <button
             disabled={busy}
@@ -708,11 +715,10 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                   </div>
                   {field("document", "Número de documento", {
                     inputMode:
-                      patient.documentType === "PASS" ||
-                      patient.documentType === "CE"
+                      patient.documentType === "PASS"
                         ? undefined
                         : "numeric",
-                    max: 20,
+                    max: patient.documentType === "PASS" ? 20 : 15,
                   })}
                 </div>
                 <label className="check-row mt-5">
@@ -831,14 +837,16 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                     max: 60,
                   })}
 
+                  {field("middleName", "Segundo nombre", { optional: true, max: 60 })}
                   {field("lastName", "Primer apellido", {
                     autoComplete: "family-name",
                     max: 60,
                   })}
 
-                  {field("phone", "Celular colombiano", {
+                  {field("secondLastName", "Segundo apellido", { optional: true, max: 60 })}
+                  {field("phone", "Celular", {
                     type: "tel",
-                    inputMode: "tel",
+                    inputMode: "numeric",
                     autoComplete: "tel-national",
                     max: 10,
                   })}
@@ -868,7 +876,7 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                           {c}
                         </option>
                       ))}
-                      <option value="other">Otra ciudad o municipio</option>
+                      <option value="other">Otro</option>
                     </select>
                     <span id="city-error" className="field-error">
                       {errors.city}
@@ -877,7 +885,7 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                       (patient.city && !cities.includes(patient.city))) && (
                       <>
                         <label htmlFor="other-city">
-                          Escribe tu ciudad o municipio
+                          Ciudad o país de residencia
                         </label>
                         <input
                           id="other-city"
@@ -891,32 +899,6 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                     )}
                   </div>
                 </div>
-                <details
-                  className="optional-details"
-                  open={
-                    patient.middleName ||
-                    patient.secondLastName ||
-                    errors.middleName ||
-                    errors.secondLastName
-                      ? true
-                      : undefined
-                  }
-                >
-                  <summary>
-                    Agregar segundo nombre o segundo apellido{" "}
-                    <span className="text-muted">· opcional</span>
-                  </summary>
-                  <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                    {field("middleName", "Segundo nombre", {
-                      optional: true,
-                      max: 60,
-                    })}
-                    {field("secondLastName", "Segundo apellido", {
-                      optional: true,
-                      max: 60,
-                    })}
-                  </div>
-                </details>
                 <fieldset className="mt-3">
                   <legend className="font-semibold mb-3">
                     ¿A nombre de quién solicitas la cita?
@@ -934,7 +916,9 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                           checked={patient.account === v}
                           onChange={() => change("account", v)}
                         />
-                        {v === "particular" ? "Particular" : "Empresa"}
+                        <span>{v === "particular" ? "Particular" : "Empresa"}
+                          {v === "particular" && <small className="block mt-1 text-xs font-normal text-muted">(Examen sugerido para contratistas, afiliaciones a ARL y cargos administrativos)</small>}
+                        </span>
                       </label>
                     ))}
                   </div>
@@ -954,17 +938,30 @@ export function BookingFlow({ resultOnly = false }: { resultOnly?: boolean }) {
                     </p>
                   </div>
                 )}
-                <details
-                  className="optional-details"
-                  open={patient.job || errors.job ? true : undefined}
-                >
-                  <summary>
-                    Agregar cargo <span className="text-muted">· opcional</span>
-                  </summary>
-                  <div className="mt-3">
-                    {field("job", "Cargo", { optional: true, max: 100 })}
-                  </div>
-                </details>
+                <div className="grid sm:grid-cols-2 gap-5 mt-5">
+                  {patient.account === "particular" ? (
+                    <>
+                      <div className="form-field">
+                        <label htmlFor="job-choice">Cargo</label>
+                        <select id="job-choice" value={otherJob || (patient.job && !suggestedJobs.includes(patient.job)) ? "other" : patient.job}
+                          onChange={(e) => { setOtherJob(e.target.value === "other"); change("job", e.target.value === "other" ? "" : e.target.value); }}
+                          aria-invalid={!!errors.job} aria-describedby="job-error" required>
+                          <option value="">Seleccionar cargo</option>
+                          {suggestedJobs.map((job) => <option key={job}>{job}</option>)}
+                          <option value="other">Otro</option>
+                        </select>
+                        <span id="job-error" className="field-error">{errors.job}</span>
+                      </div>
+                      {(otherJob || (patient.job && !suggestedJobs.includes(patient.job))) && (
+                        <div className="form-field">
+                          <label htmlFor="other-job">Escribe tu cargo</label>
+                          <input id="other-job" value={patient.job} maxLength={100} required
+                            onChange={(e) => change("job", e.target.value)} aria-invalid={!!errors.job} aria-describedby="job-error" />
+                        </div>
+                      )}
+                    </>
+                  ) : field("job", "Cargo", { max: 100 })}
+                </div>
               </>
             )}
             {step === 2 && (

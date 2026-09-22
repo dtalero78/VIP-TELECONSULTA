@@ -39,6 +39,7 @@ function patient(document = "910000001"): Patient {
     firstName: "Paciente",
     lastName: "Prueba",
     phone: "3000000000",
+    job: "Contratista",
     city: "Bogotá",
     date,
     time: "09:00",
@@ -192,3 +193,15 @@ test("firma Wompi verifica integridad y rechaza manipulación", () => {
   );
   assert.equal(paymentReady(), false);
 });
+
+ test("cargo obligatorio y documento numérico salvo pasaporte", () => {
+   for (const account of ["particular", "empresa"] as const) {
+     assert.ok(validatePatient({ ...patient(), account, company: "Empresa Prueba", job: "   " }).job);
+   }
+   for (const documentType of ["CC", "CE", "TI", "PPT", "PEP"] as const) {
+     assert.ok(validatePatient({ ...patient(), documentType, document: "AB123456" }).document);
+     assert.equal(validatePatient({ ...patient(), documentType, document: "12345678" }).document, undefined);
+   }
+   assert.equal(validatePatient({ ...patient(), documentType: "PASS", document: "AB123456" }).document, undefined);
+   assert.ok(validatePatient({ ...patient(), phone: "300000000a" }).phone);
+ });

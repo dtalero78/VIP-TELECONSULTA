@@ -13,3 +13,7 @@
 .footer { padding:16px 20px; margin:0; font-size:13px; color:#d0e8e8; }
 .footer a { display:inline-block; color:#8ce9d6; text-decoration:underline; }
 @media (prefers-reduced-motion:reduce) { .trigger { transition:none; } }
+.dialog[open] { animation:tutorial-enter .28s ease-out; }
+@keyframes tutorial-enter { from { opacity:0; transform:translateY(14px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+.close { width:auto; min-height:40px; padding:6px 12px; border-radius:10px; font-size:15px; }
+@media (prefers-reduced-motion:reduce) { .dialog[open] { animation:none; } }

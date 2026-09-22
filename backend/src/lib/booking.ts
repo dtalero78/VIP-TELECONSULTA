@@ -107,8 +107,8 @@ export function validatePatient(p: Patient): FieldErrors {
     e.documentType = "Selecciona un tipo de documento válido.";
   if (!validDocument(p.documentType, p.document))
     e.document =
-      p.documentType === "PASS" || p.documentType === "CE"
-        ? "Escribe entre 3 y 20 letras mayúsculas o números, sin espacios."
+      p.documentType === "PASS"
+        ? "Revisa tu número de documento (3 a 20 caracteres)."
         : "Escribe entre 5 y 15 dígitos, sin puntos.";
   for (const k of ["firstName", "lastName"] as const)
     if (!/^[\p{L}\p{M} '\-]{2,60}$/u.test(p[k]))
@@ -117,7 +117,7 @@ export function validatePatient(p: Patient): FieldErrors {
     if (p[k] && !/^[\p{L}\p{M} '\-]{1,60}$/u.test(p[k]))
       e[k] = "Revisa este nombre.";
   if (!/^3\d{9}$/.test(p.phone))
-    e.phone = "Escribe un celular colombiano de 10 dígitos.";
+    e.phone = "Escribe un celular de 10 dígitos que empiece por 3.";
   if (!["particular", "empresa"].includes(p.account))
     e.account = "Selecciona a nombre de quién solicitas la cita.";
   if (
@@ -125,7 +125,7 @@ export function validatePatient(p: Patient): FieldErrors {
     (p.company.trim().length < 2 || p.company.length > 120)
   )
     e.company = "Escribe el nombre de la empresa.";
-  if (p.job.length > 100) e.job = "Usa máximo 100 caracteres.";
+  if (p.job.trim().length < 2 || p.job.length > 100) e.job = "Escribe tu cargo (2 a 100 caracteres).";
   if (p.city.trim().length < 2 || p.city.length > 80)
     e.city = "Escribe tu ciudad de residencia.";
   if (

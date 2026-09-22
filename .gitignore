@@ -20,3 +20,7 @@ backend/.data/
 backend/*.sqlite
 backend/*.sqlite-shm
 backend/*.sqlite-wal
+
+/entregables/
+
+/examenes-ocupacionales/public/videos/
