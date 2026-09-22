@@ -18,6 +18,10 @@ import {
 import { paymentPolicy, paymentReady, price } from "./payments";
 import { validDocument } from "../lib/booking-options";
 import { serviceTotal } from "../lib/service-pricing";
+import {
+  notifyBookingCreated,
+  notifyBookingRescheduled,
+} from "./notifications";
 
 export function publicView(r: BookingRecord): BookingView {
   return {
@@ -125,6 +129,15 @@ export async function create(r: BookingRecord): Promise<void> {
     r.data.attention = "pending";
     r.order = "confirmed";
     save(r);
+    void notifyBookingCreated(r).catch((error) => {
+      console.error(
+        JSON.stringify({
+          event: "booking_notification_failed",
+          type: "created",
+          reason: error instanceof Error ? error.message : "unknown",
+        }),
+      );
+    });
   } catch {
     r.order = "uncertain";
     save(r);
@@ -170,6 +183,10 @@ export async function reconcile(r: BookingRecord) {
 export async function changeDate(r: BookingRecord, date: string, time: string) {
   if (r.order !== "confirmed" || !r.data.externalId || !r.data.patient)
     throw new AppError("IDENTITY", 403);
+  const previousSchedule = {
+    date: r.data.patient.date,
+    time: r.data.patient.time,
+  };
   const updated = { ...r.data.patient, date, time };
   const errors = validatePatient(updated);
   if (errors.date || errors.time) throw new AppError("INVALID", 400, errors);
@@ -185,6 +202,15 @@ export async function changeDate(r: BookingRecord, date: string, time: string) {
     await provider.reschedule(r.data.externalId, date, time);
     r.order = "confirmed";
     save(r);
+    void notifyBookingRescheduled(r, previousSchedule).catch((error) => {
+      console.error(
+        JSON.stringify({
+          event: "booking_notification_failed",
+          type: "rescheduled",
+          reason: error instanceof Error ? error.message : "unknown",
+        }),
+      );
+    });
   } catch {
     r.order = "uncertain";
     save(r);
