@@ -206,9 +206,20 @@ export function createVipServer() {
     try {
       const url = new URL(req.url || "/", "http://localhost");
       if (url.pathname === "/health") {
-        if (req.method !== "GET") throw new AppError("NOT_FOUND", 404);
-        return sendJson(res, 200, { ok: true, service: "vip-teleconsulta-api" });
-      }
+  if (req.method === "HEAD") {
+    return sendEmpty(res, 200);
+  }
+
+  if (req.method === "GET") {
+    return sendJson(res, 200, {
+      ok: true,
+      service: "vip-teleconsulta-api",
+      status: "healthy",
+    });
+  }
+
+  throw new AppError("NOT_FOUND", 404);
+}
       const match = /^\/api\/booking\/([a-z0-9-]+)$/.exec(url.pathname);
       if (!match) throw new AppError("NOT_FOUND", 404);
       return await handleApi(req, res, match[1]!);
