@@ -205,6 +205,21 @@ export function createVipServer() {
   return createServer(async (req, res) => {
     try {
       const url = new URL(req.url || "/", "http://localhost");
+      if (url.pathname === "/") {
+  if (req.method === "HEAD") {
+    return sendEmpty(res, 200);
+  }
+
+  if (req.method === "GET") {
+    return sendJson(res, 200, {
+      ok: true,
+      service: "vip-teleconsulta-api",
+      status: "running",
+    });
+  }
+
+  throw new AppError("NOT_FOUND", 404);
+}
       if (url.pathname === "/health") {
   if (req.method === "HEAD") {
     return sendEmpty(res, 200);
