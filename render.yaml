@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: vip-teleconsulta-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.17.0
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_ORIGIN
+        value: https://vipexamenesocupacionales.com
+      - key: ALLOWED_ORIGINS
+        value: https://vipexamenesocupacionales.com,https://www.vipexamenesocupacionales.com,https://dtalero78.github.io
+      - key: DATA_DIR
+        value: .data
+      - key: DATA_ENCRYPTION_KEY
+        sync: false
+      - key: MEDICONNECTA_MODE
+        value: mock
+      - key: ENABLE_DEMO
+        value: "true"
+      - key: MEDICONNECTA_BASE_URL
+        sync: false
+      - key: MEDICONNECTA_TENANT
+        value: ipsVip
+      - key: MEDICONNECTA_WRITES_ENABLED
+        value: "false"
+      - key: PAYMENT_POLICY
+        value: unconfigured
+      - key: TRUST_PROXY
+        value: "false"

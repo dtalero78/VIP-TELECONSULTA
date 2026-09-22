@@ -1,14 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Exportación estática para GitHub Pages (genera ./out).
+  // El frontend se publica como HTML/CSS/JS estático en GitHub Pages.
   output: "export",
+  trailingSlash: true,
   turbopack: {
     root: __dirname,
   },
   images: {
-    // Pages no corre el optimizador de imágenes; servimos las URLs tal cual
-    // (las de Unsplash ya se piden con tamaño vía el helper img()).
+    // Requerido para exportación estática y compatible con GitHub Pages.
     unoptimized: true,
   },
 };

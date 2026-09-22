@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { PlusIcon, MinusIcon } from "@phosphor-icons/react";
 import { faqs } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
@@ -30,23 +29,23 @@ export function FAQ() {
                   <button
                     type="button"
                     aria-expanded={isOpen}
+                    id={`faq-question-${i}`}
+                    aria-controls={`faq-answer-${i}`}
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   >
                     <span className="font-semibold text-fg">{item.q}</span>
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-strong">
-                      {isOpen ? (
-                        <MinusIcon weight="bold" className="h-4 w-4" />
-                      ) : (
-                        <PlusIcon weight="bold" className="h-4 w-4" />
-                      )}
+                    <span className="faq-toggle" data-open={isOpen} aria-hidden="true">
+                      <span /><span />
                     </span>
                   </button>
-                  {isOpen && (
+                  <div className="faq-answer" data-open={isOpen} id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-question-${i}`} aria-hidden={!isOpen}>
+                    <div className="min-h-0 overflow-hidden">
                     <p className="px-6 pb-6 leading-relaxed text-muted">
                       {item.a}
                     </p>
-                  )}
+                    </div>
+                  </div>
                 </li>
               );
             })}

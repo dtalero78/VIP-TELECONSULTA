@@ -12,13 +12,15 @@ import { FAQ } from "@/components/FAQ";
 import { CtaContacto } from "@/components/CtaContacto";
 import { Footer } from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
+import { ServiceNotes } from "@/components/ServiceNotes";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="contenido">
         <Hero />
+        <ServiceNotes />
         <Trayectoria />
         <Proceso />
         <Servicios />

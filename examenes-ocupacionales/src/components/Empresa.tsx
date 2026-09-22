@@ -5,7 +5,7 @@ import {
   ScalesIcon,
   ClipboardTextIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { coverage, img, photos } from "@/lib/site";
+import { coverage } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
 const cumplimiento = [
@@ -52,13 +52,13 @@ export function Empresa() {
         {/* Sede + cobertura (bento card-over-image estilo CVS) */}
         <Reveal delay={0.05} className="relative mt-14">
           <div className="container-box overflow-hidden bg-bg p-3 sm:p-4">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-surface sm:aspect-[16/7] lg:aspect-[21/9]">
+            <div className="relative aspect-[680/490] overflow-hidden rounded-xl bg-surface sm:aspect-[16/10]">
               <Image
-                src={img(photos.sede, 1920, 820)}
-                alt="Instalaciones clínicas de la IPS VIP Salud Ocupacional"
+                src="/images/vip/sede.png"
+                alt="Fachada y entrada de la sede de VIP Salud Ocupacional"
                 fill
                 sizes="(max-width: 1280px) 100vw, 1216px"
-                className="object-cover"
+                className="object-cover object-top"
               />
             </div>
           </div>

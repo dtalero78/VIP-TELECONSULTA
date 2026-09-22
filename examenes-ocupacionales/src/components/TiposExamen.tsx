@@ -46,7 +46,7 @@ export function TiposExamen() {
             ocupacional.
           </p>
           <a
-            href="#solicitar"
+            href="/examenes-virtuales"
             className="mt-7 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-all hover:bg-accent-strong active:scale-[0.98]"
           >
             Solicita tus exámenes
@@ -84,3 +84,4 @@ export function TiposExamen() {
     </section>
   );
 }
+

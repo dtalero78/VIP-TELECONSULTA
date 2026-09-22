@@ -12,12 +12,12 @@
   --muted: #57667d;
   --border: #e2e8f0;
   --border-strong: #cbd6e2;
-  --accent: #0e6ec7;        /* brand-600 (azul VIP) */
+  --accent: #0e6ec7; /* brand-600 (azul VIP) */
   --accent-strong: #0d58a1; /* brand-700 */
-  --accent-soft: #dbeefe;   /* brand-100 */
+  --accent-soft: #dbeefe; /* brand-100 */
   --accent-fg: #ffffff;
-  --teal: #14b8a6;          /* accent-500 (teal VIP) */
-  --teal-strong: #0d9488;   /* accent-600 */
+  --teal: #14b8a6; /* accent-500 (teal VIP) */
+  --teal-strong: #0d9488; /* accent-600 */
   --ring: #1d8ce8;
 }
 
@@ -30,7 +30,7 @@
     --muted: #95a7bd;
     --border: #21364f;
     --border-strong: #314863;
-    --accent: #46a9f7;        /* brand-400 — más brillante en dark */
+    --accent: #46a9f7; /* brand-400 — más brillante en dark */
     --accent-strong: #82c8fb;
     --accent-soft: #11324f;
     --accent-fg: #061a30;
@@ -130,4 +130,844 @@ body {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Solicitudes VIP: estilos compartidos por flujo, contacto y ayuda. */
+.booking-shell {
+  max-width: 1024px;
+  margin: auto;
+  padding: 28px 20px 64px;
+}
+.eyebrow {
+  color: var(--accent-strong);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.2s;
+  text-align: center;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid transparent;
+}
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  min-width: 0;
+}
+.form-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  border: 1px solid var(--border-strong);
+  border-radius: 0.7rem;
+  background: var(--bg);
+  padding: 0.75rem;
+  color: var(--fg);
+  font-size: 16px;
+  color-scheme: light dark;
+}
+.form-field input[aria-invalid="true"] {
+  border-color: #d55b5b;
+}
+.field-error {
+  color: #b42318;
+  font-size: 0.8rem;
+  min-height: 1.2rem;
+}
+.form-alert {
+  border: 1px solid #e9aaaa;
+  background: #fff1f0;
+  color: #84231c;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+.form-notice {
+  border: 1px solid var(--border-strong);
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 18px;
+  color: var(--fg);
+}
+.demo-banner {
+  background: #fff5d6;
+  color: #624410;
+  border: 1px solid #e7ce82;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+}
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.check-row input {
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+.choice {
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--surface);
+  cursor: pointer;
+  min-height: 52px;
+}
+.choice.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.choice input {
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+}
+.review-list > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.review-list dt {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.review-list dd {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.step-number {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+progress {
+  accent-color: var(--accent);
+}
+.notes-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal-strong);
+  border-radius: 16px;
+}
+.icon-button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.icon-button:hover {
+  background: var(--accent-soft);
+}
+.whatsapp-widget {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 45;
+  max-width: calc(100% - 40px);
+}
+.whatsapp-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 12px 18px;
+  border-radius: 30px;
+  background: #087a43;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 24px #001a2430;
+}
+.widget-minimized .whatsapp-trigger {
+  min-height: 44px;
+  padding: 10px;
+}
+.contact-panel {
+  width: 340px;
+  max-width: 100%;
+  max-height: calc(100dvh - 120px);
+  overflow-y: auto;
+  padding: 20px;
+  background: #103e4df2;
+  color: #f0fff9;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #65e5c966;
+  border-radius: 20px;
+  box-shadow: 0 12px 50px #001a2430;
+  margin-bottom: 12px;
+}
+.contact-option {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.contact-option:hover {
+  background: #a0f4d51f;
+}
+.contact-panel .text-muted { color: #c6e5df; }
+.contact-panel .eyebrow,
+.contact-panel .text-accent-strong { color: #83f3c9; }
+.contact-panel .contact-option { border-color: #65e5c933; }
+.contact-panel .contact-option-primary {
+  border-color: #83f3c980;
+  background: #83f3c916;
+}
+.contact-panel .icon-button:hover { background: #a0f4d51f; }
+.skip-link {
+  position: fixed;
+  top: -80px;
+  left: 20px;
+  z-index: 100;
+  padding: 12px;
+  background: var(--surface);
+  color: var(--fg);
+}
+.skip-link:focus {
+  top: 10px;
+}
+@media (max-width: 767px) {
+  .notes-card {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px;
+  }
+  .note-content {
+    min-height: 125px;
+  }
+  .review-list > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .whatsapp-trigger span {
+    display: none;
+  }
+  .whatsapp-trigger {
+    padding: 14px;
+  }
+  .booking-shell {
+    padding: 20px 16px 40px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .field-error {
+    color: #ffb4ab;
+  }
+  .form-alert {
+    background: #381c24;
+    color: #ffd7d2;
+    border-color: #8a4343;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .note-content {
+    animation: note-in 0.3s ease both;
+  }
+  .contact-panel {
+    animation: note-in 0.18s ease both;
+  }
+  @keyframes note-in {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Formulario claro y compacto, independiente del tema del sitio. */
+.booking-shell {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --surface-2: #f1f6fb;
+  --fg: #172f45;
+  --muted: #607286;
+  --border: #dde6ef;
+  --border-strong: #c4d3e2;
+  --accent: #176dc1;
+  --accent-strong: #14589b;
+  --accent-soft: #edf5ff;
+  --accent-fg: #ffffff;
+  --teal-strong: #147c75;
+  --ring: #2987df;
+  color: var(--fg);
+  background: var(--bg);
+  width: 100%;
+  max-width: 850px;
+  border-radius: 24px;
+  margin: 24px auto;
+  padding: 24px 28px 40px;
+}
+.booking-shell .card {
+  box-shadow: 0 8px 28px #23456608;
+}
+.booking-shell .form-field input,
+.booking-shell .form-field select {
+  color-scheme: light;
+  background: white;
+  min-height: 46px;
+  padding: 10px 12px;
+}
+.booking-shell .form-field {
+  margin-bottom: 0;
+  gap: 6px;
+}
+.booking-shell .field-error {
+  color: #a82d32;
+}
+.booking-shell .field-error:empty {
+  min-height: 5px;
+}
+.booking-shell .form-field select[aria-invalid="true"] {
+  border-color: #b42318;
+}
+.booking-shell .form-alert {
+  background: #fff1f0;
+  color: #84231c;
+  border-color: #e9aaaa;
+}
+.booking-welcome {
+  text-align: center;
+  padding: 32px 24px;
+  background: radial-gradient(ellipse at top, #eaf5ff, white 65%);
+}
+.welcome-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  background: #e1f2ed;
+  color: #167865;
+  font-size: 26px;
+}
+.booking-welcome h1 {
+  font-size: clamp(28px, 4.5vw, 42px);
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  margin: 15px 0;
+}
+.welcome-description {
+  max-width: 420px;
+  margin: auto;
+  line-height: 1.7;
+}
+.welcome-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0 6px;
+}
+.welcome-price strong {
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+.welcome-price span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.welcome-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 0;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.optional-details {
+  margin: 12px 0 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+.optional-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 0;
+}
+.price-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #b8d8f2;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #eef6ff, #f0faf6);
+  padding: 20px;
+  margin-top: 16px;
+}
+.price-value {
+  font-size: 30px;
+  color: #14589b;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.service-price {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--accent-strong);
+  font-size: 14px;
+  font-weight: 700;
+  padding-top: 2px;
+}
+.booking-shell .choice {
+  text-align: left;
+  padding: 16px;
+}
+.booking-shell .choice.selected {
+  background: #edf5ff;
+  border-color: #3787cb;
+}
+.booking-shell input[type="checkbox"],
+.booking-shell input[type="radio"] {
+  accent-color: #176dc1;
+}
+.payment-options {
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+.payment-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 16px;
+}
+.payment-status {
+  background: #fff5dd;
+  color: #75520e;
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.wompi-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 18px;
+  background: #f5f7fa;
+  border: 1px dashed #b9c6d3;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.wompi-option button {
+  white-space: nowrap;
+  opacity: 0.65;
+}
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.payment-account {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: 12px;
+  background: white;
+}
+.payment-icon {
+  font-size: 20px;
+}
+.account-number {
+  font-size: 14px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+}
+.copy-account {
+  font-size: 12px;
+  color: var(--accent-strong);
+  min-height: 44px;
+  padding: 8px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.payment-instructions {
+  background: #f6f8fb;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+.appointment-selection {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid #b6dfd1;
+  background: #f0faf6;
+  color: #246353;
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 20px;
+  text-transform: capitalize;
+}
+@media (max-width: 600px) {
+  .booking-shell {
+    margin: 0;
+    border-radius: 0;
+    padding: 16px 12px 30px;
+    min-height: 100dvh;
+  }
+  .booking-welcome {
+    padding: 26px 16px;
+  }
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+  .wompi-option {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .service-price {
+    width: 100%;
+    padding-left: 28px;
+  }
+  .booking-shell .choice {
+    flex-wrap: wrap;
+  }
+  .price-value {
+    font-size: 27px;
+  }
+}
+/* WhatsApp: icono con burbuja de orientación, sin control de minimizar. */
+.whatsapp-launcher {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.whatsapp-bubble {
+  position: relative;
+  --message-width: min(260px, calc(100vw - 126px));
+  width: var(--message-width);
+  min-width: 0;
+  border: 1px solid #65e5c966;
+  border-radius: 18px;
+  background: #103e4de8;
+  color: #f0fff9;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 12px 14px;
+  text-align: left;
+  box-shadow: 0 8px 28px #001b3440, inset 0 1px 0 #b9ffe815;
+  cursor: pointer;
+}
+.whatsapp-bubble::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  top: calc(50% - 8px);
+  width: 9px;
+  height: 16px;
+  background: #103e4de8;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.whatsapp-bubble-label {
+  display: block;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  color: #83f3c9;
+  margin-bottom: 6px;
+}
+.whatsapp-bubble-copy {
+  display: block;
+}
+.whatsapp-conversation {
+  position: relative;
+  display: block;
+  height: 65px;
+  overflow: hidden;
+}
+.whatsapp-conversation > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.whatsapp-conversation .whatsapp-bubble-copy {
+  width: calc(var(--message-width) - 30px);
+}
+.whatsapp-bubble[data-typing="true"] {
+  width: 128px;
+}
+.whatsapp-bubble[data-typing="true"] .whatsapp-conversation {
+  height: 32px;
+}
+.whatsapp-typing {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(5px);
+  pointer-events: none;
+}
+.whatsapp-typing-dots {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: #a0f4d51a;
+}
+.whatsapp-typing-dots > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a1f8d8;
+}
+.whatsapp-bubble[data-typing="true"] .whatsapp-bubble-copy {
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+}
+.whatsapp-bubble[data-typing="true"] .whatsapp-typing {
+  opacity: 1;
+  transform: translateY(0);
+}
+.whatsapp-bubble-copy strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.3;
+}
+.whatsapp-bubble-copy > span {
+  display: block;
+  font-size: 12px;
+  color: #c6e5df;
+  line-height: 1.4;
+  margin-top: 3px;
+}
+.whatsapp-launcher .whatsapp-trigger {
+  flex-shrink: 0;
+  width: 66px;
+  height: 66px;
+  min-height: 66px;
+  padding: 0;
+  border-radius: 22px;
+  color: #fff;
+  background: #20d56b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  line-height: 0;
+  border: 1px solid #2ed977;
+  box-shadow: 0 6px 24px #105a3030;
+}
+.whatsapp-launcher .whatsapp-trigger svg {
+  display: block;
+  flex-shrink: 0;
+  border: 1px solid #a4f2c2;
+  border-radius: 50%;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+}
+.whatsapp-launcher .whatsapp-trigger:hover {
+  background: #12b85a;
+}
+@media (max-width: 480px) {
+  .whatsapp-conversation {
+    height: 76px;
+  }
+  .whatsapp-bubble {
+    padding: 12px;
+    border-radius: 15px;
+  }
+  .whatsapp-launcher {
+    gap: 10px;
+  }
+  .whatsapp-launcher .whatsapp-trigger {
+    width: 58px;
+    height: 58px;
+    min-height: 58px;
+    border-radius: 19px;
+  }
+  .whatsapp-launcher .whatsapp-trigger svg {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .whatsapp-bubble {
+    animation: whatsapp-arrive 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition: width 750ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .whatsapp-conversation {
+    transition: height 750ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .whatsapp-bubble[data-typing="false"] .whatsapp-bubble-copy {
+    transition-delay: 150ms;
+  }
+  .whatsapp-bubble-copy,
+  .whatsapp-typing {
+    transition: opacity 650ms ease, transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .whatsapp-bubble[data-typing="true"] .whatsapp-typing-dots > span {
+    animation: whatsapp-dot 1400ms ease-in-out infinite;
+  }
+  .whatsapp-bubble[data-typing="true"] .whatsapp-typing-dots > span:nth-child(2) {
+    animation-delay: 180ms;
+  }
+  .whatsapp-bubble[data-typing="true"] .whatsapp-typing-dots > span:nth-child(3) {
+    animation-delay: 360ms;
+  }
+}
+@keyframes whatsapp-arrive {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes whatsapp-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.notes-card.notes-compact {
+  display: block;
+  padding: 16px 22px;
+}
+.notes-compact .note-content { min-height: 62px; }
+.note-arrow {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.note-arrow:hover { background: var(--accent-soft); }
+.booking-progress {
+  height: 22px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #e1e8ef;
+}
+.booking-progress > div {
+  height: 100%;
+  min-width: 42px;
+  background: #176cc4;
+  color: white;
+  text-align: right;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+}
+@media (max-width: 639px) {
+  .notes-compact .note-content { min-height: 104px; }
+}
+
+/* Preguntas: abrir y cerrar conservan una transición de altura real. */
+.faq-answer { display: grid; grid-template-rows: 0fr; opacity: 0; }
+.faq-answer[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
+.faq-toggle { position: relative; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--accent-soft); color: var(--accent-strong); }
+.faq-toggle span { position: absolute; top: 13px; left: 7px; width: 14px; height: 2px; border-radius: 2px; background: currentColor; }
+.faq-toggle span:last-child { transform: rotate(90deg); }
+.faq-toggle[data-open="true"] span:last-child { transform: rotate(90deg) scaleX(0); }
+.channel-link { display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; color: var(--muted); }
+.channel-link:hover { border-color: var(--accent); color: var(--fg); }
+.channel-primary { border-color: #53bfa777; background: #4ddbb512; color: var(--fg); }
+.footer-channel { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-answer { transition: grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 350ms ease; }
+  .faq-toggle span:last-child { transition: transform 350ms ease; }
+}
+@media (max-width: 639px) {
+  .vip-footer nav { padding-right: 60px; }
+  .vip-footer { padding-bottom: 124px; }
 }

@@ -1,0 +1,20 @@
+{
+  "name": "vip-teleconsulta-backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/index.js",
+    "dev": "npm run build && node dist/src/index.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "npm run build && node --test --test-concurrency=1 dist/tests/*.test.js",
+    "data:purge-drafts": "npm run build && node dist/scripts/purge-drafts.js"
+  },
+  "engines": {
+    "node": ">=22.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^5.9.3"
+  }
+}

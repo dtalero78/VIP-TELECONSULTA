@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { List, X } from "@phosphor-icons/react";
 import { navLinks, REQUEST_HREF, REQUEST_LABEL } from "@/lib/site";
 
@@ -9,16 +10,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         {/* Logo */}
-        <a href="#inicio" className="flex shrink-0 items-center gap-2.5">
+        <Link href="/#inicio" className="flex shrink-0 items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
             alt="VIP Salud Ocupacional"
-            width={44}
-            height={44}
-            className="h-10 w-10 object-contain"
+            width={92}
+            height={60}
+            className="h-14 w-20 sm:w-[92px] object-contain"
           />
           <span className="flex flex-col leading-none">
             <span className="text-[15px] font-semibold tracking-tight text-fg">
@@ -28,10 +29,10 @@ export function Header() {
               Exámenes Médicos Ocupacionales
             </span>
           </span>
-        </a>
+        </Link>
 
         {/* Nav desktop — una sola línea */}
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -55,7 +56,7 @@ export function Header() {
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-border text-fg lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-lg border border-border text-fg xl:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
           </button>
@@ -89,3 +90,5 @@ export function Header() {
     </header>
   );
 }
+
+

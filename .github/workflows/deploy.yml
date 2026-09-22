@@ -1,57 +1,83 @@
-name: Deploy to GitHub Pages
+name: Verify and deploy VIP
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
-# Permisos necesarios para publicar en GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Un solo despliegue a la vez; no cancela uno en curso
 concurrency:
-  group: pages
-  cancel-in-progress: false
-
-defaults:
-  run:
-    working-directory: examenes-ocupacionales
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  backend:
+    name: Verify backend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '22.17.0'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  frontend:
+    name: Build static frontend
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+    defaults:
+      run:
+        working-directory: examenes-ocupacionales
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.17.0'
           cache: npm
           cache-dependency-path: examenes-ocupacionales/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build (static export)
-        run: npm run build
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Validate API URL
+        shell: bash
+        run: |
+          if [ -z "$NEXT_PUBLIC_API_URL" ]; then
+            echo "::error::Create the repository variable NEXT_PUBLIC_API_URL with the HTTPS URL of the Render backend."
+            exit 1
+          fi
+          case "$NEXT_PUBLIC_API_URL" in
+            https://*) ;;
+            *) echo "::error::NEXT_PUBLIC_API_URL must start with https://"; exit 1 ;;
+          esac
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: examenes-ocupacionales/out
 
   deploy:
-    needs: build
+    name: Deploy GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: [backend, frontend]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

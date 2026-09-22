@@ -18,15 +18,15 @@ export const company = {
 } as const;
 
 // CTA principal (funnel del examen virtual): usado en nav y cierre.
-export const REQUEST_HREF = "#solicitar";
-export const REQUEST_LABEL = "Examen virtual";
+export const REQUEST_HREF = "/examenes-virtuales";
+export const REQUEST_LABEL = "Exámenes virtuales";
 
 export const navLinks = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Cómo funciona", href: "#proceso" },
-  { label: "Preguntas", href: "#faq" },
-  { label: "Empresa", href: "#empresa" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Servicios", href: "/#servicios" },
+  { label: "Cómo funciona", href: "/#proceso" },
+  { label: "Preguntas", href: "/#faq" },
+  { label: "Empresas / Cotización", href: "/empresas" },
+  { label: "Contacto", href: "/#contacto" },
 ] as const;
 
 export const stats = [
@@ -89,3 +89,4 @@ export const photos = {
   telemedicina: "photo-1576091160550-2173dba999ef", // laptop + estetoscopio (atención virtual)
   especialista: "photo-1622253692010-333f2da6031d", // profesional de la salud sonriendo
 } as const;
+

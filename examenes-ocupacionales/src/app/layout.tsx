@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vipexamenesocupacionales.com"),
   title: "Exámenes Médicos Ocupacionales Online | VIP Salud Ocupacional",
   description:
-    "Haz tu examen médico ocupacional online, sin desplazarte. Atención por videollamada con certificado digital al finalizar. Telemedicina habilitada por el Ministerio de Salud. Empresas y personas naturales en toda Colombia.",
+    "Solicita tu examen médico ocupacional virtual con VIP Salud Ocupacional. Consulta servicios, agenda y atención para empresas.",
   keywords: [
     "exámenes ocupacionales",
     "examen ocupacional virtual",
@@ -27,8 +28,23 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
+      {
+        url: "/vip-icon-32.png?v=vip-20260921",
+        type: "image/png",
+        sizes: "32x32",
+      },
+      {
+        url: "/vip-icon-192.png?v=vip-20260921",
+        type: "image/png",
+        sizes: "192x192",
+      },
+    ],
+    apple: [
+      {
+        url: "/vip-icon-180.png?v=vip-20260921",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
   alternates: {
@@ -37,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Exámenes Médicos Ocupacionales Online | VIP Salud Ocupacional",
     description:
-      "Haz tu examen ocupacional virtual sin desplazarte. Certificado digital al finalizar la consulta.",
+      "Inicia tu solicitud de examen ocupacional virtual y recibe orientación del equipo VIP.",
     url: "https://vipexamenesocupacionales.com",
     siteName: "VIP Salud Ocupacional",
     type: "website",
@@ -55,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Exámenes Médicos Ocupacionales Online | VIP Salud Ocupacional",
     description:
-      "Haz tu examen ocupacional virtual sin desplazarte. Certificado digital al finalizar la consulta.",
+      "Inicia tu solicitud de examen ocupacional virtual y recibe orientación del equipo VIP.",
     images: ["/og.png"],
   },
 };
@@ -70,7 +86,13 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-fg">{children}</body>
+      <body className="min-h-full flex flex-col bg-bg text-fg">
+        <a className="skip-link" href="#contenido">
+          Saltar al contenido
+        </a>
+        {children}
+        <WhatsAppWidget />
+      </body>
     </html>
   );
 }

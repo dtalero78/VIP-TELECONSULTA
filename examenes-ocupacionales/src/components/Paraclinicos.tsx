@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   EarIcon,
   EyeIcon,
@@ -15,9 +16,10 @@ const ayudas = [
     title: "Audiometría",
     desc: "Evalúa la capacidad auditiva y detecta pérdidas asociadas al ruido laboral.",
     feature: true,
+    photo: "/images/vip/audiometria.png",
   },
-  { icon: EyeIcon, title: "Visiometría", desc: "Tamizaje de la capacidad visual." },
-  { icon: EyeglassesIcon, title: "Optometría", desc: "Valoración refractiva y ocular." },
+  { icon: EyeIcon, title: "Visiometría", desc: "Tamizaje de la capacidad visual.", photo: "/images/vip/visiometria.png" },
+  { icon: EyeglassesIcon, title: "Optometría", desc: "Valoración refractiva y ocular.", photo: "/images/vip/optometria.png" },
   { icon: WindIcon, title: "Espirometría", desc: "Función pulmonar no invasiva." },
   {
     icon: HeartbeatIcon,
@@ -32,6 +34,7 @@ const ayudas = [
   {
     icon: FlaskIcon,
     title: "Laboratorio clínico",
+    photo: "/images/vip/laboratorio.png",
     desc: "Pruebas de sangre y orina para el concepto de aptitud.",
   },
 ];
@@ -59,9 +62,11 @@ export function Paraclinicos() {
                 delay={i * 0.05}
                 as="article"
                 className={`tile card-hover p-7 ${
-                  a.feature ? "sm:col-span-2" : ""
+                  a.feature ? "sm:col-span-2 sm:grid sm:grid-cols-2 sm:items-center sm:gap-6" : ""
                 }`}
               >
+                {a.photo && <div className={`relative overflow-hidden rounded-xl mb-5 bg-surface-2 ${a.feature ? "h-64 sm:h-full sm:min-h-64 sm:mb-0" : "h-44"}`}><Image src={a.photo} alt={`${a.title} en la sede VIP Salud Ocupacional`} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className={a.title === "Audiometría" ? "object-contain" : "object-cover"} /></div>}
+                <div>
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent-soft text-accent-strong">
                   <Icon weight="duotone" className="h-6 w-6" />
                 </span>
@@ -71,6 +76,7 @@ export function Paraclinicos() {
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">
                   {a.desc}
                 </p>
+                </div>
               </Reveal>
             );
           })}

@@ -13,14 +13,14 @@ export function Hero() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="relative">
           {/* Imagen ancha */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-2 sm:aspect-[16/9] lg:aspect-[21/9]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-2 sm:aspect-[16/10]">
             <Image
-              src={img(photos.diagnostico, 1920, 820)}
-              alt="Profesionales de la salud revisando imágenes diagnósticas en la IPS"
+              src={img(photos.diagnostico, 1920, 1440)}
+              alt="Profesional de salud conversando con una paciente durante una consulta"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#04140f]/40 to-transparent lg:from-[#04140f]/20" />
           </div>
@@ -29,26 +29,25 @@ export function Hero() {
           <div className="float-card relative mx-3 -mt-20 max-w-xl p-7 sm:mx-6 sm:p-9 lg:absolute lg:bottom-9 lg:left-9 lg:mx-0 lg:mt-0">
             <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-strong">
               <ShieldCheckIcon weight="fill" className="h-3.5 w-3.5" />
-              Telemedicina habilitada por el Ministerio de Salud
+              VIP Salud Ocupacional · atención virtual
             </p>
             <h1 className="mt-4 text-3xl font-medium leading-[1.08] tracking-tight text-fg sm:text-4xl lg:text-[2.85rem]">
               Exámenes médicos ocupacionales online
             </h1>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
               Realiza tu valoración médica laboral por videollamada, desde donde
-              estés. Te entregamos el certificado de aptitud en digital apenas
-              terminas.
+              estés. Inicia tu solicitud y recibe orientación del equipo VIP.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href="#solicitar"
+                href="/examenes-virtuales"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-all hover:bg-accent-strong active:scale-[0.98]"
               >
                 Quiero el examen virtual
                 <ArrowRightIcon weight="bold" className="h-4 w-4" />
               </a>
               <a
-                href="#solicitar"
+                href="/empresas"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-fg transition-all hover:border-accent hover:text-accent-strong active:scale-[0.98]"
               >
                 Soy empresa
@@ -61,7 +60,7 @@ export function Hero() {
                 style={{ color: "var(--teal)" }}
               />
               <span className="text-sm font-medium text-muted">
-                Certificado digital el mismo día · atención por videollamada
+                Solicitud en línea · atención por videollamada
               </span>
             </div>
           </div>
@@ -70,3 +69,6 @@ export function Hero() {
     </section>
   );
 }
+
+
+

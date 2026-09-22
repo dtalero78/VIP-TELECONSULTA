@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { CheckCircleIcon } from "@phosphor-icons/react/dist/ssr";
-import { img, photos } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
 const roles = [
@@ -22,10 +21,10 @@ export function Equipo() {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-24 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:py-32">
         {/* Imagen (izquierda en desktop) */}
         <Reveal className="order-last lg:order-first">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-surface-2 sm:aspect-[4/3] lg:aspect-[5/6]">
+          <div className="relative aspect-[680/450] overflow-hidden rounded-2xl border border-border bg-surface-2">
             <Image
-              src={img(photos.especialista, 1000, 1200)}
-              alt="Profesional especialista en salud ocupacional"
+              src="/images/vip/equipo.png"
+              alt="Equipo de VIP Salud Ocupacional frente a su sede"
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"

@@ -2,3 +2,21 @@
 .playwright-mcp/
 *.log
 .claude/
+
+# Frontend
+examenes-ocupacionales/node_modules/
+examenes-ocupacionales/.next/
+examenes-ocupacionales/out/
+examenes-ocupacionales/.env*
+!examenes-ocupacionales/.env.example
+examenes-ocupacionales/*.tsbuildinfo
+
+# Backend
+backend/node_modules/
+backend/dist/
+backend/.env*
+!backend/.env.example
+backend/.data/
+backend/*.sqlite
+backend/*.sqlite-shm
+backend/*.sqlite-wal

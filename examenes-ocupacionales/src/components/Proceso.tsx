@@ -9,27 +9,28 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { img, photos } from "@/lib/site";
 import { Reveal } from "./Reveal";
+import { VideoTutorial } from "./VideoTutorial";
 
 const pasos = [
   {
     icon: CalendarCheckIcon,
-    title: "Agenda tu cita",
-    desc: "Elige el día y la hora que mejor te queden y reserva tu valoración con nosotros.",
+    title: "Identifica tu solicitud",
+    desc: "Ingresa tu documento y comprueba si tienes una solicitud anterior.",
   },
   {
     icon: IdentificationCardIcon,
-    title: "Valida tus datos",
-    desc: "Nos compartes tu número de documento y abrimos tu caso en minutos.",
+    title: "Completa tus datos",
+    desc: "Revisa tus datos de contacto, ciudad y los servicios indicados para tu solicitud.",
   },
   {
     icon: WhatsappLogoIcon,
-    title: "Llena el formulario",
-    desc: "Te llega un formulario breve por WhatsApp; lo completas en pocos minutos.",
+    title: "Elige fecha y hora",
+    desc: "Consulta los horarios disponibles y revisa el resumen antes de confirmar.",
   },
   {
     icon: PhoneCallIcon,
-    title: "Conéctate a tu cita",
-    desc: "Un médico ocupacional te atiende por videollamada y realiza la valoración.",
+    title: "Continúa tu atención",
+    desc: "Consulta el estado de la solicitud y sigue las indicaciones para continuar con VIP.",
   },
 ];
 
@@ -40,19 +41,20 @@ export function Proceso() {
         {/* Imagen telemedicina */}
         <Reveal className="lg:sticky lg:top-24">
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
-            Tu examen ocupacional 100% online, paso a paso
+            Tu solicitud de examen virtual, paso a paso
           </h2>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-muted">
-            Todo desde tu casa o tu oficina. Cuando termina la valoración, te
-            entregamos el certificado de aptitud en formato digital.
+            Completa tu solicitud desde tu casa o tu oficina. El equipo VIP
+            puede orientarte sobre los servicios y las condiciones de atención.
           </p>
           <a
-            href="#solicitar"
+            href="/examenes-virtuales"
             className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-all hover:bg-accent-strong active:scale-[0.98]"
           >
             Quiero el examen virtual
             <ArrowRightIcon weight="bold" className="h-4 w-4" />
           </a>
+          <VideoTutorial />
           <div className="mt-8 hidden overflow-hidden rounded-2xl border border-border bg-surface-2 lg:block">
             <div className="relative aspect-[5/4]">
               <Image
@@ -111,11 +113,12 @@ export function Proceso() {
               />
               <div>
                 <p className="font-semibold text-fg">
-                  Certificado de aptitud el mismo día
+                  Consulta el siguiente paso
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-muted">
-                  Al cerrar la consulta te compartimos el enlace para descargar
-                  tu certificado de aptitud laboral.
+                  La confirmación de la solicitud no es un certificado. Revisa
+                  las indicaciones y utiliza el canal de ayuda cuando lo
+                  necesites.
                 </p>
               </div>
             </div>

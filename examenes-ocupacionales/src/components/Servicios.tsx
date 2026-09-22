@@ -122,10 +122,12 @@ export function Servicios() {
                   ))}
                 </ul>
                 <a
-                  href="#solicitar"
+                  href={active === 0 ? "/examenes-virtuales" : "/empresas"}
                   className="mt-7 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-strong"
                 >
-                  Solicita este examen
+                  {active === 0
+                    ? "Solicitar examen de ingreso"
+                    : "Consultar este servicio"}
                   <ArrowRightIcon weight="bold" className="h-4 w-4" />
                 </a>
               </div>
@@ -141,7 +143,10 @@ export function Servicios() {
                   }}
                 />
                 <div className="relative grid h-full place-items-center p-10">
-                  <Icon weight="duotone" className="h-24 w-24 text-accent-strong" />
+                  <Icon
+                    weight="duotone"
+                    className="h-24 w-24 text-accent-strong"
+                  />
                 </div>
               </div>
             </div>
