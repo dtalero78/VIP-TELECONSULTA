@@ -21,18 +21,6 @@ vipexamenesocupacionales.com / GitHub Pages
 
 No se usan cookies entre dominios. El frontend conserva únicamente un identificador opaco de sesión en `sessionStorage`; los datos personales se cifran y permanecen en el backend.
 
-## Orden seguro para publicar
-
-1. Sube este repositorio a `main` **sin archivos `.env`, SQLite, `.next` ni `node_modules`**.
-2. Crea el backend en Render usando `render.yaml` o configurando `backend/` como Root Directory.
-3. Obtén la URL HTTPS de Render, por ejemplo `https://vip-teleconsulta-api.onrender.com`.
-4. En GitHub crea la variable de repositorio `NEXT_PUBLIC_API_URL` con esa URL exacta.
-5. En **Settings > Pages**, selecciona **GitHub Actions** como Source.
-6. Ejecuta/reintenta el workflow `Verify and deploy VIP`.
-7. Prueba el flujo completo en modo demo antes de activar Mediconecta real.
-
-La variable de GitHub es obligatoria: el workflow se detiene antes de reemplazar el sitio si no existe, evitando publicar un frontend sin API.
-
 ## Render
 
 Configuración mínima:
