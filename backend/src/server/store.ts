@@ -158,6 +158,7 @@ export function notificationPage(after = "") {
     if (!r.data.externalId || !r.data.patient) return [];
     return [{
       id: r.data.externalId, version: r.updated,
+      patientName: [r.data.patient.firstName, r.data.patient.middleName, r.data.patient.lastName, r.data.patient.secondLastName].filter(Boolean).join(" "),
       startsAt: `${r.data.patient.date}T${r.data.patient.time}:00-05:00`,
       status: r.data.attention === "completed" ? "completed" : r.order,
       payment: r.payment, form: "unknown", doctorId: null,

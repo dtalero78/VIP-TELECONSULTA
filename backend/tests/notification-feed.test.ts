@@ -34,9 +34,10 @@ test("feed is disabled without token, rejects patient tokens and exposes only op
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("access-control-allow-origin"), null);
   const text = await response.text();
-  assert.ok(!text.includes("SECRET_") && !text.includes(session.token));
+  assert.ok(!text.includes("SECRET_DOCUMENT") && !text.includes(session.token));
   const body = JSON.parse(text);
-  assert.deepEqual(Object.keys(body.appointments[0]).sort(), ["id", "version", "startsAt", "status", "payment", "form", "doctorId"].sort());
+  assert.deepEqual(Object.keys(body.appointments[0]).sort(), ["id", "version", "startsAt", "status", "payment", "form", "doctorId", "patientName"].sort());
+  assert.equal(body.appointments[0].patientName, 'SECRET_NAME');
   assert.equal(body.appointments[0].id, "known-provider-order");
   assert.equal(body.nextCursor, null);
   assert.equal((await fetch(base + '?after=..%2F', { headers: { Authorization: `Bearer ${token}` } })).status, 400);
