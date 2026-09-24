@@ -148,6 +148,23 @@ export function getByReference(reference: string): BookingRecord | null {
       .get(reference) as Row | undefined,
   );
 }
+// Read-only operational feed. Never expose sessions, documents or clinical data.
+export function notificationPage(after = "") {
+  const rows = database().prepare(
+    "SELECT id,state,payment,reference,data,updated,expires FROM requests WHERE state != 'draft' AND id > ? ORDER BY id LIMIT 100",
+  ).all(after) as Row[];
+  const appointments = rows.flatMap(row => {
+    const r = fromRow(row)!;
+    if (!r.data.externalId || !r.data.patient) return [];
+    return [{
+      id: r.data.externalId, version: r.updated,
+      startsAt: `${r.data.patient.date}T${r.data.patient.time}:00-05:00`,
+      status: r.data.attention === "completed" ? "completed" : r.order,
+      payment: r.payment, form: "unknown", doctorId: null,
+    }];
+  });
+  return { appointments, nextCursor: rows.length === 100 ? rows[rows.length - 1]!.id : null };
+}
 export function createSession(): { token: string; record: BookingRecord } {
   const token = randomBytes(32).toString("hex"),
     now = Date.now();

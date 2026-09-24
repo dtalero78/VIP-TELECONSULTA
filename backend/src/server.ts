@@ -16,6 +16,7 @@ import { availability, isDemo, baseUrl } from "./server/mediconecta";
 import { checkout, processEvent, paymentPolicy } from "./server/payments";
 import { validDate } from "./lib/booking";
 import { allowedOrigins, frontendUrl } from "./config";
+import { notificationFeed } from "./server/notification-feed";
 
 const MAX_BODY = 16_384;
 
@@ -205,6 +206,10 @@ export function createVipServer() {
   return createServer(async (req, res) => {
     try {
       const url = new URL(req.url || "/", "http://localhost");
+      if (url.pathname === "/api/notifications/appointments" && req.method === "GET") {
+        // Machine-to-machine only. No browser CORS, no patient-session credentials.
+        return sendJson(res, 200, notificationFeed(req.headers.authorization, url.searchParams.get("after") || ""));
+      }
       if (url.pathname === "/") {
   if (req.method === "HEAD") {
     return sendEmpty(res, 200);
