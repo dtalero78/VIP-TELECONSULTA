@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { formatCOP, paymentAccounts } from "@/lib/service-pricing";
 import { whatsappLinks } from "@/lib/contact";
@@ -107,6 +108,27 @@ export function PaymentOptions({
       <p className="text-xs text-muted mt-2 min-h-5" role="status">
         {copied}
       </p>
+      <div className="payment-qr-card">
+        <div className="payment-qr-copy">
+          <p className="eyebrow">También puedes escanear</p>
+          <h3 className="font-semibold mt-1">QR con los datos de pago</h3>
+          <p className="text-sm text-muted mt-2">
+            Escanéalo desde otro dispositivo para consultar los mismos datos de
+            Bancolombia, Davivienda, Nequi y Bre-B. Este QR no confirma el pago
+            automáticamente.
+          </p>
+        </div>
+        <div className="payment-qr-image-wrap">
+          <Image
+            src="/images/pagos/qr-medios-de-pago-vip.png"
+            alt="Código QR con los medios de pago de VIP Salud Ocupacional"
+            className="payment-qr-image"
+            width={220}
+            height={220}
+            priority={false}
+          />
+        </div>
+      </div>
       <div className="payment-instructions">
         <h3 className="font-semibold">
           {confirmed
