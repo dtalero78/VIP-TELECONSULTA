@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { formatCOP, paymentAccounts } from "@/lib/service-pricing";
 import { whatsappLinks } from "@/lib/contact";
+
 export function PriceTotal({ amount }: { amount: number | null }) {
   return (
     <div
@@ -25,6 +26,7 @@ export function PriceTotal({ amount }: { amount: number | null }) {
     </div>
   );
 }
+
 export function PaymentOptions({
   amount,
   confirmed = false,
@@ -35,9 +37,11 @@ export function PaymentOptions({
   showTotal?: boolean;
 }) {
   const [copied, setCopied] = useState("");
+
   return (
     <section className="payment-options" aria-label="Medios de pago">
       {showTotal && <PriceTotal amount={amount} />}
+
       <div className="payment-heading">
         <div>
           <p className="eyebrow">Paga como prefieras</p>
@@ -45,6 +49,7 @@ export function PaymentOptions({
         </div>
         <span className="payment-status">Validación por VIP</span>
       </div>
+
       <div className="wompi-option">
         <div>
           <strong>Pago en línea con Wompi</strong>
@@ -62,9 +67,11 @@ export function PaymentOptions({
           Pagar con Wompi
         </button>
       </div>
+
       <p id="wompi-maintenance" className="text-xs text-muted mb-5">
         Estamos habilitando este canal para ti.
       </p>
+
       <div className="payment-grid">
         {paymentAccounts.map((account) => (
           <article className="payment-account" key={account.name}>
@@ -105,30 +112,52 @@ export function PaymentOptions({
           </article>
         ))}
       </div>
+
       <p className="text-xs text-muted mt-2 min-h-5" role="status">
         {copied}
       </p>
+
       <div className="payment-qr-card">
         <div className="payment-qr-copy">
-          <p className="eyebrow">También puedes escanear</p>
-          <h3 className="font-semibold mt-1">QR con los datos de pago</h3>
+          <p className="eyebrow">También puedes pagar escaneando</p>
+          <h3 className="font-semibold mt-1">QR oficial de pago VIP</h3>
           <p className="text-sm text-muted mt-2">
-            Escanéalo desde otro dispositivo para consultar los mismos datos de
-            Bancolombia, Davivienda, Nequi y Bre-B. Este QR no confirma el pago
-            automáticamente.
+            Escanéalo desde la opción de pagos QR de una entidad habilitada.
+            Antes de confirmar, verifica que el destinatario sea VIP SALUD
+            OCUPACIONAL. El pago se confirma en tu aplicación bancaria, no en
+            esta página.
+          </p>
+          <p className="text-xs text-muted mt-2">
+            QR Bancolombia / Redeban.
           </p>
         </div>
-        <div className="payment-qr-image-wrap">
+
+        <div
+          className="payment-qr-image-wrap"
+          style={{ width: "min(400px, 88vw)", maxWidth: "100%" }}
+        >
           <Image
             src="/images/pagos/qr-medios-de-pago-vip.png"
-            alt="Código QR con los medios de pago de VIP Salud Ocupacional"
+            alt="Código QR oficial de pago de VIP Salud Ocupacional"
             className="payment-qr-image"
-            width={220}
-            height={220}
+            width={972}
+            height={972}
+            sizes="(max-width: 640px) 88vw, 400px"
+            style={{ width: "100%", height: "auto" }}
             priority={false}
           />
+          <a
+            href="/images/pagos/qr-medios-de-pago-vip.png"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary mt-3"
+            style={{ display: "inline-flex" }}
+          >
+            Abrir QR en tamaño completo ↗
+          </a>
         </div>
       </div>
+
       <div className="payment-instructions">
         <h3 className="font-semibold">
           {confirmed
@@ -160,6 +189,7 @@ export function PaymentOptions({
           Recibir orientación por WhatsApp ↗
         </a>
       </div>
+
       {confirmed && (
         <p className="text-sm text-muted mt-5">
           Para tu atención, busca un espacio privado y comprueba tu conexión a
